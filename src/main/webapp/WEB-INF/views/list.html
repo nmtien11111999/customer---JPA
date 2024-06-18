@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer List</title>
+</head>
+<body>
+<h1>Customer List</h1>
+<p>
+    <a th:href="@{/admin/create}">Create New Customer</a>
+</p>
+<table>
+    <thead>
+    <tr>
+        <th>STT</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer , state : ${customers}">
+        <td th:text="${state.count}"></td>
+        <td th:text="${customer.name}"></td>
+        <td th:text="${customer.email}"></td>
+        <td th:text="${customer.address}"></td>
+        <td>
+            <a th:href="@{/admin/edit/{id}(id=${customer.id})}">Edit</a>
+        </td>
+        <td>
+            <form th:action="@{/admin/delete/{id}(id=${customer.id})}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+        <td>
+            <a th:href="@{/admin/view/{id}(id=${customer.id})}">View</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
